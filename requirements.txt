@@ -1,1 +1,4 @@
-flask 
+flask
+requests
+python-dotenv
+pybreaker

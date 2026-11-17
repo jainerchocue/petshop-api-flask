@@ -1,0 +1,5 @@
+flask
+requests
+python-dotenv
+pybreaker
+mysql-connector-python

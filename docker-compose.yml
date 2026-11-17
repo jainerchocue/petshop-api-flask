@@ -1,0 +1,58 @@
+services:
+  mascotas:
+    build: ./mascotas
+    ports:
+      - "5001:5001"
+    env_file:
+      - .env
+
+  usuarios:
+    build: ./usuarios
+    ports:
+      - "5002:5002"
+    env_file:
+      - .env
+
+  consultas:
+    build: ./consultas
+    ports:
+      - "5003:5003"
+    env_file:
+      - .env
+
+  citas:
+    build: ./citas
+    ports:
+      - "5004:5004"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+      - mascotas
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: petshop
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      
+
+# Es es  un contenedor  que fue hecho el el proceso de aprnedizaje (repaso), lo anterios es lo que sigue con el de laboratorio, entonces este  solo queda ocmo de repaso que se hizo par apdoer comprender mejor.
+  mysql_consulta:
+    # este fue una prueba para repasar, 
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: consultadb
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_consulta:/var/lib/mysql # Almacenamiento persistente administrado por Docker.
+
+volumes:
+  mysql_data:
+  mysql_consulta:
